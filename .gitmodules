@@ -1,0 +1,15 @@
+[submodule "delta-vault-contracts/lib/forge-std"]
+	path = delta-vault-contracts/lib/forge-std
+	url = https://github.com/foundry-rs/forge-std
+[submodule "delta-vault-contracts/lib/solady"]
+	path = delta-vault-contracts/lib/solady
+	url = https://github.com/vectorized/solady
+[submodule "delta-vault-contracts/lib/foundry-chainlink-toolkit"]
+	path = delta-vault-contracts/lib/foundry-chainlink-toolkit
+	url = https://github.com/smartcontractkit/foundry-chainlink-toolkit
+[submodule "delta-vault-contracts/lib/openzeppelin-contracts"]
+	path = delta-vault-contracts/lib/openzeppelin-contracts
+	url = https://github.com/OpenZeppelin/openzeppelin-contracts
+[submodule "delta-vault-contracts/lib/chainlink-brownie-contracts"]
+	path = delta-vault-contracts/lib/chainlink-brownie-contracts
+	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
