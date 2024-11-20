@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity >0.6.0 <0.8.0;
 
-import "../../../vendor/OpenZeppelin/openzeppelin-contracts/contracts/token/ERC20/ERC20.sol";
+import "contracts/vendor/contracts/token/ERC20.sol";
 
 abstract contract LinkERC20 is ERC20 {
   /**

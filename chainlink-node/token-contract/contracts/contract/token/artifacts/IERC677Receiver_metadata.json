@@ -1,0 +1,69 @@
+{
+	"compiler": {
+		"version": "0.7.6+commit.7338295f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "sender",
+						"type": "address"
+					},
+					{
+						"internalType": "uint256",
+						"name": "value",
+						"type": "uint256"
+					},
+					{
+						"internalType": "bytes",
+						"name": "data",
+						"type": "bytes"
+					}
+				],
+				"name": "onTokenTransfer",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/contract/token/IERC677Receiver.sol": "IERC677Receiver"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/contract/token/IERC677Receiver.sol": {
+			"keccak256": "0xf6b88dc066f209c63991af1f56600380e531b9a6d90f5edaf610280973117e68",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d99bc0d1a6847cce4a03ea0df0849d54026f39aa8e21a8259166419f2351d87a",
+				"dweb:/ipfs/QmZYKrQGy8CCie6xiWkxsp9bq3aBkm9EA3Q2WoR7K1Wxy7"
+			]
+		}
+	},
+	"version": 1
+}

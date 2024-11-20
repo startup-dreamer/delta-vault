@@ -1,0 +1,64 @@
+{
+	"compiler": {
+		"version": "0.7.6+commit.7338295f"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"inputs": [],
+				"name": "typeAndVersion",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "pure",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"details": "Interface contracts should use to report its type and version.",
+			"kind": "dev",
+			"methods": {
+				"typeAndVersion()": {
+					"details": "Returns type and version for the contract. The returned string has the following format: <contract name><SPACE><semver> Try to keep its length less than 32 to take up less contract space."
+				}
+			},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/contract/ITypeAndVersion.sol": "ITypeAndVersion"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/contract/ITypeAndVersion.sol": {
+			"keccak256": "0x0679073f362249ddbebaa3ddcea7cd43553fa36b352003da876baf425b9bc983",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://aa41f70abe37068fff6f5e479c02c822ae7e10e62447d002169661e2a34b0f9f",
+				"dweb:/ipfs/QmaxEs5N1jQ7wNvf3jyZXWTC4J5mzwP2hUEUYdboQzAw1S"
+			]
+		}
+	},
+	"version": 1
+}
