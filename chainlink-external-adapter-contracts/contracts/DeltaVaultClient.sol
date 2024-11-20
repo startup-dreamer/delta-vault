@@ -13,7 +13,7 @@ contract DeltaVaultClient is ChainlinkClient, ConfirmedOwner {
     using Chainlink for Chainlink.Request;
     address public oracle;
     string public jobId;
-    address public aurumAddress;
+    address public deltaVaultAddress;
 
     struct TokenPrice {
         uint256 price;
@@ -26,8 +26,8 @@ contract DeltaVaultClient is ChainlinkClient, ConfirmedOwner {
 
     event RequestTokenPrice(bytes32 indexed requestId, uint256 price);
 
-    modifier ownerOrAurumAddress {
-        require(msg.sender == owner || msg.sender == aurumAddress, "Not Allowed");
+    modifier ownerOrdeltaVaultAddress {
+        require(msg.sender == owner || msg.sender == deltaVaultAddress, "Not Allowed");
         _;
     }
 
