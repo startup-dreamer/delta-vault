@@ -6,7 +6,7 @@ import {IStructDef} from "src/interfaces/IStructDef.sol";
 import {DeltaVaultProduct} from "src/DeltaVaultProduct.sol";
 import {IDeltaVaultProductDef} from "src/interfaces/IDeltaVaultProduct.sol";
 
-import {IERC20} from "@openzeppelin/token/ERC20/IERC20.sol";
+import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "forge-std/console2.sol";
 
 contract MainProgressTest is BaseTest, IStructDef, IDeltaVaultProductDef {

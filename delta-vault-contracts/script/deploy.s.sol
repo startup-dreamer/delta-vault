@@ -6,7 +6,7 @@ import "forge-std/console2.sol";
 import {DeltaVaultProduct} from "src/DeltaVaultProduct.sol";
 import {DeltaVaultFactory} from "src/DeltaVaultFactory.sol";
 import {PriceObserver} from "src/PriceObserver.sol";
-import {USD} from "src/mock/USD.sol";
+import {USDe} from "src/mock/USDe.sol";
 import {WBTC} from "src/mock/WBTC.sol";
 import {AggregatorMock} from "src/mock/Aggregator.sol";
 import "src/interfaces/IStructDef.sol";
@@ -23,7 +23,7 @@ contract Deploy is Script, IStructDef {
 
         factory.setImplementation(address(DeltaVaultImpl));
 
-        USD usd = new USD();
+        USDe usd = new USDe();
         WBTC wbtc = new WBTC();
 
         vm.stopBroadcast();
@@ -121,7 +121,7 @@ contract Deploy is Script, IStructDef {
         vm.startBroadcast(deployerPrivateKey);
 
         DeltaVaultProduct product = DeltaVaultProduct(0xEFc5102aD2e5F763020A0A808261E27B8B257B89);
-        USD usd = USD(0x42EFBA52668d124e8c7427aA7cb2c4Fe7212109A);
+        USDe usd = USDe(0x42EFBA52668d124e8c7427aA7cb2c4Fe7212109A);
 
         usd.approve(address(product), UINT256_MAX);
         product.buyShare(10 ether);

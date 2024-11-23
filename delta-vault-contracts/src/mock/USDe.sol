@@ -3,7 +3,7 @@ pragma solidity ^0.8.7;
 
 import "solady/tokens/ERC20.sol";
 
-contract USD is ERC20 {
+contract USDe is ERC20 {
     function name() public pure override returns (string memory) {
         return "USDe";
     }

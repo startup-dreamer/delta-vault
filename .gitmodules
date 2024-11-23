@@ -13,3 +13,6 @@
 [submodule "delta-vault-contracts/lib/chainlink-brownie-contracts"]
 	path = delta-vault-contracts/lib/chainlink-brownie-contracts
 	url = https://github.com/smartcontractkit/chainlink-brownie-contracts
+[submodule "delta-vault-contracts/lib/pyth-sdk-solidity"]
+	path = delta-vault-contracts/lib/pyth-sdk-solidity
+	url = https://github.com/pyth-network/pyth-sdk-solidity

@@ -12,7 +12,7 @@ interface IStructDef {
     }
 
     struct ProductInfo {
-        address targetTokenFeeData;
+        bytes32 targetTokenPythId;
         uint256 targetInitPrice;
         uint256 targetKnockInPrice;
         uint256 targetKnockOutPrice;
@@ -31,7 +31,7 @@ interface IStructDef {
 
     struct ProductInitArgs {
         address targetToken;
-        address targetTokenFeeData;
+        bytes32 targetTokenPythId;
         uint256 targetInitPrice;
         uint256 targetKnockInPrice;
         uint256 targetKnockOutPrice;
@@ -39,7 +39,8 @@ interface IStructDef {
         uint256 period;
         uint256 baseProfit;
         address usdToken;
-        address usdFeeData;
+        bytes32 usdPythId;
         address priceObserver;
+        address pythAddress;
     }
 }

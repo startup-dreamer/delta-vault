@@ -1,7 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity 0.8.23;
 
-import {AggregatorV3Interface} from "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV3Interface.sol";
+import "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
+import "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
 import {IERC20Metadata} from "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
@@ -17,12 +18,9 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
     uint256 constant PROFIT_BASE = 10000;
     uint256 constant TRADE_SHARD = 10;
 
-    // feeData address on polygon mumbai
-    // https://docs.chain.link/data-feeds/price-feeds/addresses?network=polygon&page=1#mumbai-testnet
-
     // target token address
     address public _targetToken;
-    address public _targetTokenFeeData;
+    bytes32 public _targetTokenPythId;
     uint8 public _targetDecimal;
     // target token price, in per usd, decimal equal the price feed
     uint256 public _targetInitPrice;
@@ -30,7 +28,8 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
     uint256 public _targetKnockOutPrice;
 
     address public _usdToken;
-    address public _usdFeeData;
+    bytes32 public _usdPythId;
+    IPyth public pyth;
     mapping(address => uint256) public _boughtAmount;
 
     uint32 public _startTime;
@@ -52,7 +51,7 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
      */
     function initialize(ProductInitArgs calldata args) public override {
         _targetToken = args.targetToken;
-        _targetTokenFeeData = args.targetTokenFeeData;
+        _targetTokenPythId = args.targetTokenPythId;
         _targetInitPrice = args.targetInitPrice;
         _targetKnockInPrice = args.targetKnockInPrice;
         _targetKnockOutPrice = args.targetKnockOutPrice;
@@ -60,7 +59,8 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
         _period = uint32(args.period);
         _baseProfit = uint16(args.baseProfit);
         _usdToken = args.usdToken;
-        _usdFeeData = args.usdFeeData;
+        _usdPythId = args.usdPythId;
+        pyth = IPyth(args.pythAddress);
 
         _targetDecimal = IERC20Metadata(args.targetToken).decimals();
 
@@ -69,7 +69,7 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
         // register product
         IPriceObserver(_priceObserver).registerProduct(
             ProductInfo(
-                args.targetTokenFeeData,
+                args.targetTokenPythId,
                 args.targetInitPrice,
                 args.targetKnockInPrice,
                 args.targetKnockOutPrice,
@@ -84,7 +84,7 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
      * @dev user buy some share on the DeltaVault
      * @param amount amount of usd token you want to pay
      */
-    function buyShare(uint256 amount) public returns (uint256) {
+    function buyShare(uint256 amount, bytes[] calldata priceUpdateData) public payable returns (uint256) {
         if (block.timestamp >= _startTime) {
             revert DeltaVaultStarted();
         }
@@ -92,14 +92,10 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
         // transfer usd token
         IERC20(_usdToken).safeTransferFrom(msg.sender, address(this), amount);
 
-        // calculate how much dest can be bought
-        // and handle decimail at the same time
-        uint256 dstAmount = getLatestPrice(_usdFeeData) * amount
-            * 10 ** AggregatorV3Interface(_targetTokenFeeData).decimals() * 10 ** _targetDecimal
-            / (
-                _targetInitPrice * 10 ** AggregatorV3Interface(_usdFeeData).decimals()
-                    * 10 ** IERC20Metadata(_usdToken).decimals()
-            );
+        uint256 usdPrice = getLatestPrice(_usdPythId, priceUpdateData);
+        uint256 targetPrice = getLatestPrice(_targetTokenPythId, priceUpdateData);
+
+        uint256 dstAmount = usdPrice * amount * 10 ** _targetDecimal / (_targetInitPrice * 10 ** IERC20Metadata(_usdToken).decimals());
 
         _boughtAmount[msg.sender] += dstAmount;
         totalBoughtAmount += dstAmount;
@@ -125,7 +121,7 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
 
         uint256 initUSDAmount = _boughtAmount[msg.sender] * _targetInitPrice
             * 10 ** IERC20Metadata(_usdToken).decimals()
-            / (10 ** AggregatorV3Interface(_targetTokenFeeData).decimals() * 10 ** IERC20Metadata(_targetToken).decimals());
+            / (10 ** IERC20Metadata(_targetToken).decimals());
 
         uint256 allPeriodProfitUSDAmount = initUSDAmount * _baseProfit / PROFIT_BASE;
 
@@ -162,20 +158,21 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
      * @dev For the sake of convenience, security issues will not be considered for the time being
      */
     function hedge() public {
-        uint256 currentPrice = getLatestPrice(_targetTokenFeeData);
-        uint256 initUSDAmount = totalBoughtAmount * _targetInitPrice * 10 ** IERC20Metadata(_usdToken).decimals()
-            / (10 ** AggregatorV3Interface(_targetTokenFeeData).decimals() * 10 ** IERC20Metadata(_targetToken).decimals());
-        uint256 BalanceU = IERC20(_usdToken).balanceOf(address(this));
-        uint256 targetAssetsInU = IERC20(_targetToken).balanceOf(address(this)) * _targetInitPrice
+        uint256 currentPrice = getLatestPrice(_targetTokenPythId, new bytes[](0));
+        uint256 initUSDAmount = totalBoughtAmount * _targetInitPrice
             * 10 ** IERC20Metadata(_usdToken).decimals()
-            / (10 ** AggregatorV3Interface(_targetTokenFeeData).decimals() * 10 ** IERC20Metadata(_targetToken).decimals());
+            / (10 ** IERC20Metadata(_targetToken).decimals());
+        uint256 BalanceU = IERC20(_usdToken).balanceOf(address(this));
+        uint256 targetAssetsInU = IERC20(_targetToken).balanceOf(address(this)) * currentPrice
+            * 10 ** IERC20Metadata(_usdToken).decimals()
+            / (10 ** IERC20Metadata(_targetToken).decimals());
 
         address[] memory paths;
 
         // should sell
         if (currentPrice > _targetInitPrice) {
             uint256 sellAmountInTargetToken =
-                ((targetAssetsInU - initUSDAmount * getLatestPrice(_usdFeeData)) / getLatestPrice(_targetTokenFeeData));
+                ((targetAssetsInU - initUSDAmount * getLatestPrice(_usdPythId, new bytes[](0))) / getLatestPrice(_targetTokenPythId, new bytes[](0)));
             uint256 expectOut;
             IUniswapV2Router01(_uniswapV2Router).swapTokensForExactTokens(
                 expectOut, sellAmountInTargetToken, paths, address(this), block.timestamp
@@ -196,19 +193,16 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
      *
      * @return latest price
      */
-    function getLatestPrice(address priceFeed) public view returns (uint256) {
-        (
-            ,
-            /* uint80 roundID */
-            int256 price,
-            ,
-            ,
-        ) = /* uint256 startedAt */
-        /* uint256 timeStamp */
-        /* uint80 answeredInRound */
-         AggregatorV3Interface(priceFeed).latestRoundData();
+    function getLatestPrice(bytes32 priceId, bytes[] memory priceUpdateData) public payable returns (uint256) {
+        // Update price feeds and pay the fee
+        uint fee = pyth.getUpdateFee(priceUpdateData);
+        pyth.updatePriceFeeds{value: fee}(priceUpdateData);
 
-        // ignore when price is less than 0
-        return uint256(price);
+        // Get the current price
+        PythStructs.Price memory price = pyth.getPrice(priceId);
+        
+        // Convert price to uint256 and scale appropriately
+        // Note: Pyth prices typically use 8 decimals
+        return uint256(uint64(price.price) * 10 ** 10);
     }
 }

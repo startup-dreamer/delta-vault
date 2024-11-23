@@ -5,7 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {PriceObserver} from "src/PriceObserver.sol";
 import {DeltaVaultFactory} from "src/DeltaVaultFactory.sol";
 import {DeltaVaultProduct} from "src/DeltaVaultProduct.sol";
-import {USD} from "src/mock/USD.sol";
+import {USDe} from "src/mock/USDe.sol";
 import {WBTC} from "src/mock/WBTC.sol";
 import {AggregatorMock} from "src/mock/Aggregator.sol";
 
@@ -17,7 +17,7 @@ contract BaseTest is Test {
     address internal _admin = makeAddr("admin");
     address internal _user = makeAddr("user");
     address internal _wbtc = address(new WBTC());
-    address internal _usd = address(new USD());
+    address internal _usd = address(new USDe());
     AggregatorMock internal _wbtcFeeData = new AggregatorMock();
     AggregatorMock internal _usdFeeData = new AggregatorMock();
 

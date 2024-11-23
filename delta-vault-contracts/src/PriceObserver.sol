@@ -1,13 +1,12 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV2V3Interface.sol";
-import "@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol";
-
+import "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
+import "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
+import {AutomationCompatible} from "@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol";
 import "./interfaces/IPriceObserver.sol";
 
 contract PriceObserver is IPriceObserver, AutomationCompatibleInterface {
-    mapping(string => address) private dataFeedAddresses;
     mapping(address => ProductInfo) private productInfos;
     mapping(address => ProductResult) private productResult;
     address[] private monitorProductList;
@@ -15,10 +14,13 @@ contract PriceObserver is IPriceObserver, AutomationCompatibleInterface {
 
     uint256 public immutable interval;
     uint256 public lastTimeStamp;
+    
+    IPyth public immutable pyth;
 
-    constructor(uint256 updateInterval, uint256 startTime) {
+    constructor(uint256 updateInterval, uint256 startTime, address pythAddress) {
         interval = updateInterval;
         lastTimeStamp = startTime;
+        pyth = IPyth(pythAddress);
     }
 
     function getProductResult(address productAddr)
@@ -70,9 +72,9 @@ contract PriceObserver is IPriceObserver, AutomationCompatibleInterface {
                 continue;
             }
 
-            AggregatorV2V3Interface dataFeed = AggregatorV2V3Interface(product.targetTokenFeeData);
-            (, int256 currentPriceInt,,,) = dataFeed.latestRoundData();
-            uint256 currentPrice = uint256(currentPriceInt);
+            // Get price from Pyth
+            PythStructs.Price memory priceData = pyth.getPrice(product.targetTokenPythId);
+            uint256 currentPrice = uint256(uint64(priceData.price) * 10 ** 10);
 
             emit PriceCheck(productAddr, currentPrice);
 

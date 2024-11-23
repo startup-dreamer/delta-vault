@@ -1,14 +1,14 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "@chainlink/contracts/src/v0.8/shared/interfaces/AggregatorV2V3Interface.sol";
-import "@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol";
-
+import "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
+import "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
+import {AutomationCompatible} from "@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol";
 import {IHedgeExecutor} from "src/interfaces/IHedgeExecutor.sol";
 import {IDeltaVaultProduct} from "src/interfaces/IDeltaVaultProduct.sol";
 
 contract HedgeExecutor is IHedgeExecutor, AutomationCompatibleInterface {
-    mapping(string => address) private dataFeedAddresses;
+    mapping(string => bytes32) private pythPriceFeedIds;
     mapping(address => ProductInfo) private productInfos;
     mapping(address => ProductResult) private productResult;
     address[] private monitorProductList;
@@ -17,9 +17,12 @@ contract HedgeExecutor is IHedgeExecutor, AutomationCompatibleInterface {
     uint256 public immutable interval;
     uint256 public lastTimeStamp;
 
-    constructor(uint256 updateInterval, uint256 startTime) {
+    IPyth public immutable pyth;
+
+    constructor(uint256 updateInterval, uint256 startTime, address pythAddress) {
         interval = updateInterval;
         lastTimeStamp = startTime;
+        pyth = IPyth(pythAddress);
     }
 
     function registerProduct() external {

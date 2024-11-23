@@ -5,7 +5,7 @@ import {Test} from "forge-std/Test.sol";
 import {PriceObserver} from "src/PriceObserver.sol";
 import {DeltaVaultFactory} from "src/DeltaVaultFactory.sol";
 import {DeltaVaultProduct} from "src/DeltaVaultProduct.sol";
-import {USD} from "src/mock/USD.sol";
+import {USDe} from "src/mock/USDe.sol";
 import {WBTC} from "src/mock/WBTC.sol";
 import {AggregatorMock} from "src/mock/Aggregator.sol";
 
