@@ -80,10 +80,10 @@ export default function Scene1() {
         <Flex>
             <Flex flexDirection={"column"} textAlign={"left"}>
                 <Heading fontSize={"2xl"} marginTop={"10px"}>
-                    Receive converted BTC
+                    Receive maximum earnings in BTC
                 </Heading>
                 <Text color={"lightgrey"}>
-                    {"If the crypto price breaches the Caution price on any day and expires at or below the Target price, your subscription amount will be converted to BTC at Target price on the settlement date:"}
+                    {"If the price stays between the Profit price and Caution price, you’ll receive your earnings on the settlement date:"}
                 </Text>
                 <div
                     style={{
