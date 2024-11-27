@@ -1,16 +1,11 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.7;
 
-import "solady/tokens/ERC20.sol";
+import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract WBTC is ERC20 {
-    function name() public pure override returns (string memory) {
-        return "Wrapped BTC";
-    }
-
-    /// @dev Returns the symbol of the token.
-    function symbol() public pure override returns (string memory) {
-        return "WBTC";
+    constructor() ERC20("Wrapped BTC", "WBTC") {
+        // Optionally, you can add initialization logic here.
     }
 
     function mint(address user, uint256 amount) public {

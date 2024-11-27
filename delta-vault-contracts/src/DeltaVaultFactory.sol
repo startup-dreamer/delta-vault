@@ -4,20 +4,28 @@ pragma solidity 0.8.23;
 import {Ownable} from "solady/auth/Ownable.sol";
 import "solady/utils/LibClone.sol";
 import {IDeltaVaultProduct} from "src/interfaces/IDeltaVaultProduct.sol";
-import {IStructDef} from "src/interfaces/IStructDef.sol";
+import {IStruct} from "src/interfaces/IStruct.sol";
 
-contract DeltaVaultFactory is Ownable, IStructDef {
-    event ProductCreate(address);
+/// @title DeltaVaultFactory
+/// @notice Factory contract for creating new DeltaVault products
+contract DeltaVaultFactory is Ownable, IStruct {
+    event ProductCreate(address product);
 
-    address internal _impl;
+    /// @notice Implementation contract address that will be cloned
+    address internal impl;
 
     constructor(address owner_) {
         _initializeOwner(owner_);
     }
 
+    /// @notice Creates a new DeltaVault product
+    /// @param args Initialization arguments for the new product
+    /// @return Address of the newly created product
     function createProduct(ProductInitArgs calldata args) public returns (address) {
+        require(impl != address(0), "Implementation not set");
+
         // clone and initialize
-        address product = LibClone.clone(_impl);
+        address product = LibClone.clone(impl);
         IDeltaVaultProduct(product).initialize(args);
 
         emit ProductCreate(product);
@@ -25,7 +33,11 @@ contract DeltaVaultFactory is Ownable, IStructDef {
         return product;
     }
 
-    function setImplementation(address impl) public onlyOwner {
-        _impl = impl;
+    /// @notice Sets the implementation contract address
+    /// @param _impl New implementation contract address
+    /// @dev Can only be called by contract owner
+    function setImplementation(address _impl) public onlyOwner {
+        require(_impl != address(0), "Invalid implementation address");
+        impl = _impl;
     }
 }

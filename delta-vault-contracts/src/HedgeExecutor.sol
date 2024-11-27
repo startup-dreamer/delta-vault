@@ -3,11 +3,13 @@ pragma solidity ^0.8.7;
 
 import "@pythnetwork/pyth-sdk-solidity/IPyth.sol";
 import "@pythnetwork/pyth-sdk-solidity/PythStructs.sol";
-import {AutomationCompatible} from "@chainlink/contracts/src/v0.8/automation/AutomationCompatible.sol";
+import {AccessControl} from "@openzeppelin/contracts/access/AccessControl.sol";
 import {IHedgeExecutor} from "src/interfaces/IHedgeExecutor.sol";
 import {IDeltaVaultProduct} from "src/interfaces/IDeltaVaultProduct.sol";
 
-contract HedgeExecutor is IHedgeExecutor, AutomationCompatibleInterface {
+contract HedgeExecutor is IHedgeExecutor, AccessControl {
+    bytes32 public constant KEEPER_ROLE = keccak256("KEEPER_ROLE");
+
     mapping(string => bytes32) private pythPriceFeedIds;
     mapping(address => ProductInfo) private productInfos;
     mapping(address => ProductResult) private productResult;
@@ -23,6 +25,11 @@ contract HedgeExecutor is IHedgeExecutor, AutomationCompatibleInterface {
         interval = updateInterval;
         lastTimeStamp = startTime;
         pyth = IPyth(pythAddress);
+        _grantRole(DEFAULT_ADMIN_ROLE, msg.sender);
+    }
+
+    function addKeeper(address keeper) external onlyRole(DEFAULT_ADMIN_ROLE) {
+        _grantRole(KEEPER_ROLE, keeper);
     }
 
     function registerProduct() external {
@@ -35,13 +42,13 @@ contract HedgeExecutor is IHedgeExecutor, AutomationCompatibleInterface {
     function checkUpkeep(bytes calldata /* checkData */ )
         external
         view
-        override
+        onlyRole(KEEPER_ROLE)
         returns (bool upkeepNeeded, bytes memory performData)
     {
         upkeepNeeded = (block.timestamp - lastTimeStamp) > interval;
     }
 
-    function performUpkeep(bytes calldata /* performData */ ) external override {
+    function performUpkeep(bytes calldata /* performData */ ) external onlyRole(KEEPER_ROLE) {
         if ((block.timestamp - lastTimeStamp) > interval) {
             // set timestamp
             lastTimeStamp = block.timestamp - block.timestamp % interval;

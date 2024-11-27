@@ -17,6 +17,3 @@ contract USDe is ERC20 {
         _mint(user, amount);
     }
 }
-
-
-// 0x5FbDB2315678afecb367f032d93F642f64180aa3 link token address added
