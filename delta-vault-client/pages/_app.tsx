@@ -4,6 +4,7 @@ import "../styles/globals.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Navbar } from "../components/Navbar";
 import { ApolloProvider } from '@apollo/client';
+import Head from "next/head";
 import client from '../const/apollo-client'; // Adjust the import path to where your Apollo Client instance is created
 // This is the chain your dApp will work on.
 // Change this to the chain your app is built for.
@@ -12,17 +13,23 @@ const activeChain = "mumbai";
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
-        <ThirdwebProvider
-            clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
-            activeChain={activeChain}
-        >
-            <ChakraProvider>
-                <ApolloProvider client={client}>
-                    <Navbar />
-                    <Component {...pageProps} />
-                </ApolloProvider>
-            </ChakraProvider>
-        </ThirdwebProvider>
+        <>
+            <Head>
+                <title>DeltaVault</title>
+                <meta name="DeltaVault" content="Get the most secured transactions with Delta Vault." />
+            </Head>
+            <ThirdwebProvider
+                clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
+                activeChain={activeChain}
+            >
+                <ChakraProvider>
+                    <ApolloProvider client={client}>
+                        <Navbar />
+                        <Component {...pageProps} />
+                    </ApolloProvider>
+                </ChakraProvider>
+            </ThirdwebProvider>
+        </>
     );
 }
 

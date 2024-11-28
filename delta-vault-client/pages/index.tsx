@@ -24,12 +24,12 @@ const Home: NextPage = () => {
                             </span> from Delta Vault
                         </Heading>
                         <Text fontSize={"xl"} align={"right"} color={"lightgrey"}>
-                            Get the most secured transactions with Delta Vault. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem nostrum quia culpa. Maxime quae reiciendis nisi libero repudiandae in distinctio explicabo. Aperiam perferendis dolores officia molestiae tempore modi quas soluta.
+                            Get the most secured and seamless transactions for Bitcoin with Delta Vault. With advanced encryption and transparent processes, your assets are always protected. Manage your crypto with confidence and ease and secure the future with Delta Vault.
                         </Text>
                         <Flex gap={"18"}>
                             <Flex bg={"#160738"} padding={"10px 40px"} borderRadius={"10px"} direction="column" gap={2} justifyContent={"center"} alignItems={"center"} height={"100%"} rowGap={"1"}>
-                                <Heading fontSize="md" >TOTAL VALUE LOCKED (USDe)</Heading>
-                                <Text fontSize="lg" color={"#4287f5"} fontWeight="bold" >9,018,623.78</Text>
+                                <Heading fontSize="md" >TOTAL VALUE LOCKED</Heading>
+                                <Text fontSize="lg" color={"#4287f5"} fontWeight="bold" >$ 9,018,623.78</Text>
                             </Flex>
                             <Button as={NextLink}
                                 href='/products'
@@ -69,7 +69,7 @@ const Home: NextPage = () => {
                         }}
                     >
                         <Text fontSize={"2xl"} align={"left"}>
-                            Get the most secured transactions with Delta Vault. Lorem ipsum, dolor sit amet consectetur adipisicing elit. Voluptatem nostrum quia culpa. Maxime quae reiciendis nisi libero repudiandae in distinctio explicabo. Aperiam perferendis dolores officia molestiae tempore modi quas soluta.
+                            Get the most secured transactions and navigate market fluctuations with confidence using Delta Vault. Our secure transactions and advanced strategies ensure you achieve higher yields while safeguarding your assets. Whether the market rises or falls, we help you stay ahead, grow consistently, and achieve financial goals with ease.
                         </Text>
                     </div>
                 </Flex>
