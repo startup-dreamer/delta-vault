@@ -4,10 +4,7 @@
   "scripts": {
     "codegen": "graph codegen",
     "build": "graph build",
-    "deploy": "graph deploy --node https://api.thegraph.com/deploy/ delta-vault/delta-vault-subgraph",
-    "create-local": "graph create --node http://localhost:8020/ delta-vault/delta-vault-subgraph",
-    "remove-local": "graph remove --node http://localhost:8020/ delta-vault/delta-vault-subgraph",
-    "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 delta-vault/delta-vault-subgraph",
+    "deploy": "goldsky subgraph deploy delta-vault/1.0.0",
     "test": "graph test"
   },
   "dependencies": {
