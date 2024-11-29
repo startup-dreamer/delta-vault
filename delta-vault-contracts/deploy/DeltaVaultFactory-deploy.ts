@@ -31,10 +31,10 @@ async function main() {
 
 
     /* Ethtena testnet */
-    const deltaVaultProduct = "0xc275B3380d68591eAacBe6d4F5BEc2C6948Ab24E";
-    const wbtcAddress = "0xA64D3f740757F36A8f1b62D9E25984C66860a062";
-    const usdeAddress = "0x426E7d03f9803Dd11cb8616C65b99a3c0AfeA6dE";
-    const priceObserverAddress = "0x9e226545857211a8843F823173D5b631d01c1B85";
+    const deltaVaultProduct = "0xE56Cbd1ad4979bc51344aBAaD2eBd3eEda02e084";
+    const wbtcAddress = "0x5cd0a85594669741E908d094ad1f13943D37c514";
+    const usdeAddress = "0x426E7d03f9803Dd11cb8616C65b99a3c0AfeA6dE"; 
+    const priceObserverAddress = "0x09D32a699CfA758C04683E7AbF16D7644fe14644";
     const pythOracleAddress = "0x2880aB155794e7179c9eE2e38200202908C17B43";
     const targetTokenPythId = "0xe62df6c8b4a85fe1a67db44dc12de5db330f7ac66b72dc658afedf0f4a415b43";
     const usdPythId = "0x6ec879b1e9963de5ee97e9c8710b742d6228252a5e2ca12d4ae81d7fe5ee8c5d";
