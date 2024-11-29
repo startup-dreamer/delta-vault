@@ -5,11 +5,22 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { Navbar } from "../components/Navbar";
 import { ApolloProvider } from '@apollo/client';
 import Head from "next/head";
-import client from '../const/apollo-client'; // Adjust the import path to where your Apollo Client instance is created
-// This is the chain your dApp will work on.
-// Change this to the chain your app is built for.
-// You can also import additional chains from `@thirdweb-dev/chains` and pass them directly.
-const activeChain = "mumbai";
+import client from '../const/apollo-client';
+
+const ethenaTestnet = {
+  chainId: 52085143,
+  rpc: ["https://testnet.rpc.ethena.fi"],
+  nativeCurrency: {
+    decimals: 18,
+    name: "ETH",
+    symbol: "ETH",
+  },
+  shortName: "ethena",
+  slug: "ethena",
+  testnet: true,
+  chain: "Ethena Testnet",
+  name: "Ethena Testnet"
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
     return (
@@ -20,7 +31,8 @@ function MyApp({ Component, pageProps }: AppProps) {
             </Head>
             <ThirdwebProvider
                 clientId={process.env.NEXT_PUBLIC_TEMPLATE_CLIENT_ID}
-                activeChain={activeChain}
+                supportedChains={[ethenaTestnet]}
+                activeChain={ethenaTestnet}
             >
                 <ChakraProvider>
                     <ApolloProvider client={client}>

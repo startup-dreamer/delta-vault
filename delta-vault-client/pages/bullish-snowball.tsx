@@ -114,7 +114,7 @@ function App() {
                                 </div>
                                 <input
                                     type='number'
-                                    defaultValue={1000}
+                                    defaultValue={100}
                                     onChange={(event) => setAmount(parseFloat(event.target.value))}
                                     style={{
                                         backgroundColor: "transparent",
@@ -126,13 +126,18 @@ function App() {
                                         paddingLeft: "15px",
                                     }}
                                 />
-                                <Web3Button
+                          <Web3Button
                                     contractAddress={DELTA_VAULT_PRODUCT_ADDRESS}
                                     contractAbi={DELTA_VAULT_PRODUCT_ABI}
-                                    action={(contract) => {
-                                        contract.call("buyShare", [(BigInt(amount) * BigInt(1e18)).toString()])
+                                    action={async (contract) => {
+                                        try {
+                                            await contract.call("buyShare", [(BigInt(amount) * BigInt(1e18)).toString()]);
+                                        } catch (error) {
+                                            console.error("Transaction failed:", error);
+                                        }
                                     }}
-                                    onSubmit={() => console.log("Transaction submitted")}
+                                    onSuccess={() => console.log("Transaction successful")}
+                                    onError={(error) => console.error("Error:", error)}
                                 >
                                     Deposit
                                 </Web3Button>
