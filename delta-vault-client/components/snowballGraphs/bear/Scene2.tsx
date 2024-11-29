@@ -13,13 +13,19 @@ export default function Scene1() {
                 </Text>
                 <div
                     style={{
-                        width: "90%",
-                        padding: "5px",
-                        borderRadius: "10px",
-                        margin: "20px 0"
+                        "display": 'flex',
+                        "justifyContent": 'center'
                     }}
                 >
-                    <Image src="/images/bear/Bear_C2.png" alt='Bear C2' filter={"invert(1)"} width={600} />
+                    <div
+                        style={{
+                            padding: "5px",
+                            borderRadius: "10px",
+                            paddingTop: "20px",
+                        }}
+                    >
+                        <Image src="/images/bear/Bear_C2.png" alt='Bear C2' width={550} />
+                    </div>
                 </div>
             </Flex>
         </Flex>
