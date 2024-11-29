@@ -48,19 +48,19 @@ contract HedgeExecutor is IHedgeExecutor, AccessControl {
         upkeepNeeded = (block.timestamp - lastTimeStamp) > interval;
     }
 
-    function performUpkeep(bytes calldata /* performData */ ) external onlyRole(KEEPER_ROLE) {
+    function performUpkeep(bytes[] calldata priceUpdateData) external onlyRole(KEEPER_ROLE) {
         if ((block.timestamp - lastTimeStamp) > interval) {
             // set timestamp
             lastTimeStamp = block.timestamp - block.timestamp % interval;
-            _hedge();
+            _hedge(priceUpdateData);
         }
     }
 
-    function _hedge() internal {
+    function _hedge(bytes[] calldata priceUpdateData) internal {
         for (uint256 i = 0; i < monitorProductList.length; i++) {
             address productAddr = monitorProductList[i];
             IDeltaVaultProduct p = IDeltaVaultProduct(productAddr);
-            p.hedge();
+            p.hedge(priceUpdateData);
         }
     }
 }

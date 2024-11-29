@@ -14,5 +14,5 @@ interface IDeltaVaultProductDef {
 
 interface IDeltaVaultProduct is IDeltaVaultProductDef, IStruct {
     function initialize(ProductInitArgs calldata args) external;
-    function hedge() external;
+    function hedge() payable external;
 }

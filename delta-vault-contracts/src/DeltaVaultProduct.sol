@@ -76,15 +76,14 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
 
     /// @notice Allows users to buy shares in the vault
     /// @param amount Amount of USD token to invest
-    /// @param priceUpdateData Price update data from Pyth oracle
     /// @return Amount of target tokens received
     function buyShare(uint256 amount, bytes[] calldata priceUpdateData) public payable returns (uint256) {
         if (block.timestamp >= _startTime) {
             revert DeltaVaultStarted();
         }
-
+    
         // transfer usd token
-        IERC20(_usdToken).safeTransferFrom(msg.sender, address(this), amount);
+        IERC20(_usdToken).transferFrom(msg.sender, address(this), amount);
 
         uint256 usdePrice = getLatestPrice(_usdPythId, priceUpdateData);
         uint256 targetPrice = getLatestPrice(_targetTokenPythId, priceUpdateData);
@@ -126,32 +125,32 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
             // if not knock in nor knock out
             // reward all reward
             reward = initUSDAmount + allPeriodProfitUSDAmount;
-            IERC20(_usdToken).safeTransfer(msg.sender, reward);
+            IERC20(_usdToken).transferFrom(msg.sender, reward);
         } else if (status == DeltaVaultResultStatus.InAndOut || status == DeltaVaultResultStatus.OnlyOut) {
             // if knock in and knock out, or only knock out
             // reward the valid period part of reward
             reward = initUSDAmount + allPeriodProfitUSDAmount * validPeriod / _period;
-            IERC20(_usdToken).safeTransfer(msg.sender, reward);
+            IERC20(_usdToken).transferFrom(msg.sender, reward);
         } else if (status == DeltaVaultResultStatus.OnlyIn) {
             // if knock in but no knock out
             if (endPrice > _targetInitPrice) {
                 // if end price larger than init price, user get invest amount back
                 reward = initUSDAmount;
-                IERC20(_usdToken).safeTransfer(msg.sender, reward);
+                IERC20(_usdToken).transferFrom(msg.sender, reward);
             } else {
                 reward = initUSDAmount
                     - initUSDAmount * (endPrice - _targetKnockInPrice) / (_targetKnockOutPrice - _targetKnockInPrice);
 
                 // if end price smaller than init price, user get part loss
-                IERC20(_usdToken).safeTransfer(msg.sender, reward);
+                IERC20(_usdToken).transferFrom(msg.sender, reward);
             }
         }
     }
 
     /// @notice Performs hedging operations by directly transferring tokens
     /// @dev Simple direct token transfer implementation without DEX
-    function hedge() public {
-        uint256 currentPrice = getLatestPrice(_targetTokenPythId, new bytes[](0));
+    function hedge(bytes[] calldata priceUpdateData) public payable {
+        uint256 currentPrice = getLatestPrice(_targetTokenPythId, priceUpdateData);
         uint256 initUSDAmount = totalBoughtAmount * _targetInitPrice * 10 ** IERC20Metadata(_usdToken).decimals()
             / (10 ** IERC20Metadata(_targetToken).decimals());
         uint256 balanceUSD = IERC20(_usdToken).balanceOf(address(this));
@@ -162,14 +161,14 @@ contract DeltaVaultProduct is IDeltaVaultProduct, IPriceObserverDef {
         if (currentPrice > _targetInitPrice) {
             // Sell target token for USD
             uint256 sellAmount = (
-                (targetAssetsInUSD - initUSDAmount * getLatestPrice(_usdPythId, new bytes[](0)))
-                    / getLatestPrice(_targetTokenPythId, new bytes[](0))
+                (targetAssetsInUSD - initUSDAmount * getLatestPrice(_usdPythId, priceUpdateData))
+                    / getLatestPrice(_targetTokenPythId, priceUpdateData)
             );
-            IERC20(_targetToken).safeTransfer(msg.sender, sellAmount);
+            IERC20(_targetToken).transferFrom(msg.sender, sellAmount);
         } else {
             // Buy target token with USD
             uint256 buyAmountInUSD = initUSDAmount - targetAssetsInUSD;
-            IERC20(_usdToken).safeTransfer(msg.sender, buyAmountInUSD);
+            IERC20(_usdToken).transferFrom(msg.sender, buyAmountInUSD);
         }
     }
 

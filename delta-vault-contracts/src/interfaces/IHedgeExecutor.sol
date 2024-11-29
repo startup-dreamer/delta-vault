@@ -11,8 +11,5 @@ interface IHedgeExecutorDef is IStruct {
 }
 
 interface IHedgeExecutor is IHedgeExecutorDef {
-    /**
-     * @dev Registers a new product.
-     */
     function registerProduct() external;
 }

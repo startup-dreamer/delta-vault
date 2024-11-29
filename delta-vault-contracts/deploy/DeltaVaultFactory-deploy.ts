@@ -68,7 +68,7 @@ async function main() {
         targetKnockInPrice: ethers.utils.parseUnits("85000", 8),  // Knock-in price ($85,000) with 8 decimals
         targetKnockOutPrice: ethers.utils.parseUnits("105000", 8), // Knock-out price ($105,000) with 8 decimals
         startTime: Math.floor(Date.now() / 1000) + 3600,    // Start time (1 hour from now)
-        period: 30 * 24 * 3600,                             // Period (30 days in seconds)
+        period: 28 * 24 * 3600,                             // Period (28 days in seconds)
         baseProfit: 1000,                                   // 10% base profit (10000 = 100%)
         usdToken: usdeAddress,           // Address of USDe contract
         usdPythId: usdPythId, // Pyth USDe price feed ID
