@@ -1,9 +1,7 @@
-import { ConnectWallet } from "@thirdweb-dev/react";
-import styles from "../styles/Home.module.css";
 import Image from "next/image";
 import valut_image from "../public/images/vault-case-image.png";
 import { NextPage } from "next";
-import { Container, Flex, Stack, Heading, Button, color, Text } from "@chakra-ui/react";
+import { Container, Flex, Heading, Button, Text } from "@chakra-ui/react";
 import NextLink from "next/link";
 
 const Home: NextPage = () => {

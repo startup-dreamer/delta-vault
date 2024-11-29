@@ -1,5 +1,4 @@
-// pages/products.tsx
-import { Link, Box, Flex, Grid, GridItem, Text, Image, Button, VStack, HStack, Badge, Tabs, TabList, TabPanels, Tab, TabPanel, Heading } from '@chakra-ui/react';
+import { Link, Flex, Grid, GridItem, Text, Image, Button, VStack, HStack, Badge, Tabs, TabList, TabPanels, Tab, TabPanel, Heading } from '@chakra-ui/react';
 import { EmptyState } from "../components/ui/empty-state";
 import { GrInProgress } from "react-icons/gr";
 import NextLink from "next/link";

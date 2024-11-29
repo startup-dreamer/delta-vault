@@ -1,19 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Flex, Stack, Accordion, AccordionItem, AccordionButton, AccordionPanel, AccordionIcon, FormLabel, Input, Button, Text, Image } from '@chakra-ui/react';
-import {
-    Table,
-    Thead,
-    Tbody,
-    Tfoot,
-    Tr,
-    Th,
-    Td,
-    TableCaption,
-    TableContainer,
-} from '@chakra-ui/react'
-import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
+import { Box, Flex, Stack, Text, Image } from '@chakra-ui/react';
 import { Heading } from '@chakra-ui/react';
-import { Progress, VStack } from '@chakra-ui/react';
 import { Web3Button } from "@thirdweb-dev/react";
 import { DELTA_VAULT_PRODUCT_ADDRESS } from '../const/addresses';
 import { DELTA_VAULT_PRODUCT_ABI } from '../const/abi';
@@ -21,9 +8,6 @@ import {
     Stat,
     StatLabel,
     StatNumber,
-    StatHelpText,
-    StatArrow,
-    StatGroup,
 } from '@chakra-ui/react'
 import { Tabs, TabList, TabPanels, Tab, TabPanel } from '@chakra-ui/react';
 import Scene1 from '../components/snowballGraphs/bear/Scene1';

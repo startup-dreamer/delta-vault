@@ -1,10 +1,9 @@
-// pages/portfolio.tsx
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { useQuery } from '@apollo/client';
-import { Box, Flex, VStack, Heading, Text, SimpleGrid, Card, Image } from '@chakra-ui/react';
+import { Box, Flex, VStack, Heading, Text, SimpleGrid, Image } from '@chakra-ui/react';
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
 import { GET_USER_PORTFOLIO } from '../components/queries'; // Adjust the import path
-import { Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorModeValue } from '@chakra-ui/react';
+import { Stat, StatLabel, StatNumber, StatHelpText } from '@chakra-ui/react';
 import { DELTA_VAULT_PRODUCT_ADDRESS } from '../const/addresses';
 import { Web3Button } from "@thirdweb-dev/react";
 import { EmptyState } from "../components/ui/empty-state";
