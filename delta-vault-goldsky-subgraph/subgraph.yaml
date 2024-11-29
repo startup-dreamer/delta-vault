@@ -1,0 +1,79 @@
+specVersion: 0.0.5
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: DeltaVaultFactory
+    network: ethena-testnet
+    source:
+      address: "0xA45BaFe594b05Cd51d1B95175e88F6e22C6E2c74"
+      abi: DeltaVaultFactory
+      startBlock: 2736364
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ProductCreate
+      abis:
+        - name: DeltaVaultFactory
+          file: ./abis/DeltaVaultFactory.json
+        - name: DeltaVaultProduct
+          file: ./abis/DeltaVaultProduct.json
+      eventHandlers:
+        - event: ProductCreate(address)
+          handler: handleProductCreate
+      file: ./src/delta-vault-factory.ts
+  - kind: ethereum
+    name: PriceObserver
+    network: ethena-testnet
+    source:
+      address: "0x09D32a699CfA758C04683E7AbF16D7644fe14644"
+      abi: PriceObserver
+      startBlock: 2736364
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - ProductCreate
+      abis:
+        - name: DeltaVaultFactory
+          file: ./abis/DeltaVaultFactory.json
+        - name: DeltaVaultProduct
+          file: ./abis/DeltaVaultProduct.json
+        - name: PriceObserver
+          file: ./abis/PriceObserver.json
+      eventHandlers:
+        - event: KnockIn(indexed address,uint256)
+          handler: handleKnockIn
+        - event: KnockOut(indexed address,uint256)
+          handler: handleKnockOut
+        - event: PriceCheck(indexed address,uint256)
+          handler: handlePriceCheck
+        - event: ProductStatusChange(indexed address,uint8)
+          handler: handleProductStatus
+      file: ./src/price-observer.ts
+templates:
+  - name: DeltaVaultProduct
+    kind: ethereum/contract
+    network: ethena-testnet
+    source:
+      abi: DeltaVaultProduct
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/delta-vault-product.ts
+      entities:
+        - Product
+        - User
+        - UserProduct
+      abis:
+        - name: DeltaVaultProduct
+          file: ./abis/DeltaVaultProduct.json
+        - name: DeltaVaultFactory
+          file: ./abis/DeltaVaultFactory.json
+      eventHandlers:
+        - event: BuyShare(indexed address,uint256,uint256)
+          handler: handleBuyShare
