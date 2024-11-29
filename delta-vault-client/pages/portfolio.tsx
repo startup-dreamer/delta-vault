@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { Box, Flex, VStack, Heading, Text, SimpleGrid, Image } from '@chakra-ui/react';
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
@@ -31,23 +31,7 @@ const PortfolioPage = () => {
             portfolio: [
                 {
                     id: "1",
-                    holdingTargetAmount: "2.5", // Amount of shares or holdings
-                },
-                {
-                    id: "2",
-                    holdingTargetAmount: "3.8", // Another portfolio item
-                },
-                {
-                    id: "3",
-                    holdingTargetAmount: "1.2", // Another portfolio item
-                },
-                {
-                    id: "4",
-                    holdingTargetAmount: "1.2", // Another portfolio item
-                },
-                {
-                    id: "5",
-                    holdingTargetAmount: "1.2", // Another portfolio item
+                    holdingTargetAmount: "0.002272727", // Amount of shares or holdings
                 },
             ],
         },
@@ -62,12 +46,13 @@ const PortfolioPage = () => {
     };
     const getBtcPrice = async () => {
         try {
-            const response = await fetch('https://api.coinbase.com/v2/prices/BTC-USD/spot');
+            const response = await fetch('https://api.binance.com/api/v3/ticker/price?symbol=BTCUSDT');
+            console.log(response);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
             const data = await response.json();
-            return parseFloat(data.data.amount);
+            return parseFloat(data.price);
         } catch (error) {
             console.error('Error fetching BTC price:', error);
             return null; // or a default value
@@ -75,13 +60,12 @@ const PortfolioPage = () => {
     };
 
 
-    // const [btcPrice, setBtcPrice] = useState<number | null>(null);
-    const btcPrice = 51000;
+    const [btcPrice, setBtcPrice] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchBtcPrice = async () => {
             const price = await getBtcPrice();
-            // setBtcPrice(price);
+            setBtcPrice(price);
         };
 
         fetchBtcPrice();
