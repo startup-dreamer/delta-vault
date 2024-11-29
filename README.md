@@ -19,6 +19,11 @@
 - [Contact](#contact)
 - [Acknowledgment](#acknowledgment)
 - [Links And References](#links-and-references) -->
+What is snowball?
+<video width="100%" controls>
+  <source src="https://static.okx.com/cdn/help/okex/earn/Snowball_video_english.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
 
 ## Strategy Overview
 
