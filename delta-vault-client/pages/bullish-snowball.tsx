@@ -31,8 +31,8 @@ import {
     NumberIncrementStepper,
     NumberDecrementStepper,
 } from '@chakra-ui/react';
-import { SNOWBOW_PRODUCT_ADDRESS } from '../const/addresses';
-import { SNOWBOW_PRODUCT_ABI } from '../const/abi';
+import { DELTA_VAULT_PRODUCT_ADDRESS } from '../const/addresses';
+import { DELTA_VAULT_PRODUCT_ABI } from '../const/abi';
 import { relative } from 'path';
 import Scene1 from '../components/snowballGraphs/bull/Scene1';
 import Scene2 from '../components/snowballGraphs/bull/Scene2';
@@ -127,8 +127,8 @@ function App() {
                                     }}
                                 />
                                 <Web3Button
-                                    contractAddress={SNOWBOW_PRODUCT_ADDRESS}
-                                    contractAbi={SNOWBOW_PRODUCT_ABI}
+                                    contractAddress={DELTA_VAULT_PRODUCT_ADDRESS}
+                                    contractAbi={DELTA_VAULT_PRODUCT_ABI}
                                     action={(contract) => {
                                         contract.call("buyShare", [(BigInt(amount) * BigInt(1e18)).toString()])
                                     }}

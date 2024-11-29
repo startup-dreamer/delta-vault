@@ -5,13 +5,13 @@ import { Box, Flex, VStack, Heading, Text, SimpleGrid, Card, Image } from '@chak
 import { ConnectWallet, useAddress } from '@thirdweb-dev/react';
 import { GET_USER_PORTFOLIO } from '../components/queries'; // Adjust the import path
 import { Stat, StatLabel, StatNumber, StatHelpText, StatArrow, useColorModeValue } from '@chakra-ui/react';
-import { SNOWBOW_PRODUCT_ADDRESS } from '../const/addresses';
+import { DELTA_VAULT_PRODUCT_ADDRESS } from '../const/addresses';
 import { Web3Button } from "@thirdweb-dev/react";
 import { EmptyState } from "../components/ui/empty-state";
 import { MdNoEncryptionGmailerrorred } from "react-icons/md";
 import { RiErrorWarningFill } from "react-icons/ri";
 import {
-    SNOWBOW_PRODUCT_ABI
+    DELTA_VAULT_PRODUCT_ABI
 } from '../const/abi';
 interface PortfolioItem {
     id: string;
@@ -224,8 +224,8 @@ const PortfolioPage = () => {
                                 <Box marginTop="20px" w={"100%"}>
                                     <div style={{ "display": "flex", justifyContent: "center" }}>
                                         <Web3Button
-                                            contractAddress={SNOWBOW_PRODUCT_ADDRESS}
-                                            contractAbi={SNOWBOW_PRODUCT_ABI}
+                                            contractAddress={DELTA_VAULT_PRODUCT_ADDRESS}
+                                            contractAbi={DELTA_VAULT_PRODUCT_ABI}
                                             action={(contract) => {
                                                 contract.call("claimReward")
                                             }}

@@ -15,8 +15,8 @@ import { Card, CardHeader, CardBody, CardFooter } from '@chakra-ui/react'
 import { Heading } from '@chakra-ui/react';
 import { Progress, VStack } from '@chakra-ui/react';
 import { Web3Button } from "@thirdweb-dev/react";
-import { SNOWBOW_PRODUCT_ADDRESS } from '../const/addresses';
-import { SNOWBOW_PRODUCT_ABI } from '../const/abi';
+import { DELTA_VAULT_PRODUCT_ADDRESS } from '../const/addresses';
+import { DELTA_VAULT_PRODUCT_ABI } from '../const/abi';
 import {
     Stat,
     StatLabel,
@@ -118,8 +118,8 @@ function App() {
                                     }}
                                 />
                                 <Web3Button
-                                    contractAddress={SNOWBOW_PRODUCT_ADDRESS}
-                                    contractAbi={SNOWBOW_PRODUCT_ABI}
+                                    contractAddress={DELTA_VAULT_PRODUCT_ADDRESS}
+                                    contractAbi={DELTA_VAULT_PRODUCT_ABI}
                                     action={(contract) => {
                                         contract.call("buyShare", [(BigInt(amount) * BigInt(1e18)).toString()])
                                     }}
