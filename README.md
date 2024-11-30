@@ -78,7 +78,7 @@ new_cash = current_cash - (buy_sell_quantity * current_price)
 last_price = current_price
 ```
 
-### 3. Contracts Module ([`contracts`](./delta-vault-contracts))
+### 2. Contracts Module ([`contracts`](./delta-vault-contracts))
 
 - Contains the core contracts of Delta Vault.
 - The contracts are deployedd on **Ethena Testnet**.
@@ -94,13 +94,13 @@ last_price = current_price
 > 
 > To address the current limitations, keepers provide the necessary liquidity to facilitate token swaps during hedging operations.
 
-### 4. Goldsky Subgraph ([`subgraph`](./delta-vault-goldsky-subgraph))
+### 3. Goldsky Subgraph ([`subgraph`](./delta-vault-goldsky-subgraph))
 
 - Contains the Subgraphs for Delta Vault
 - Mainly used to query the portfolio data.
 - [Demo query link](https://api.goldsky.com/api/public/project_cm3z3gioefix501v6daxi2u5a/subgraphs/delta-vault/1.0.0/gn)
 
-### 5. Keepers ([`keeper`](./keeper))
+### 4. Keepers ([`keeper`](./keeper))
 
 - Keepers function as backend oracle servers.
 - Keep on checking snowball products (set intervals) for knock-ins, knock-outs, expiry, and asset price change events.
