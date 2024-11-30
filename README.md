@@ -35,7 +35,7 @@ DeltaVaultFactory deployed to: 0xA45BaFe594b05Cd51d1B95175e88F6e22C6E2c74 /
 
 Delta Vault is inspired by the success of snowball products in traditional finance, particularly in the Chinese derivatives market. These products grew from 2-3 billion yuan ($0.3-0.5 billion) in 2016-2017 to over 50 billion yuan ($7.6 billion) by 2020, with an estimated market size of $45 billion by early 2024. OKX, the world's third-largest centralized derivatives exchange, launched its snowball products for BTC and ETH in 2023, highlighting the demand for such offerings. However, centralized control in traditional systems motivated me to create a decentralized alternative. Delta Vault aims to bring the benefits of snowball products to DeFi, eliminating the need for a central authority.
 
-I chose [USDe](https://ethena.fi/) and the Ethena Network as they are best suited for this type of product. USDe and Ethena offer a more decentralized and potentially higher-yield stablecoin solution compared to traditional stablecoins like USDC or USDT. Unlike centralized stablecoins, USDe is backed by a synthetic dollar protocol with on-chain collateralization, while Ethena generates yields through its delta-neutral staking strategy.
+I chose [USDe](https://ethena.fi/) and the **Ethena Network** as they are best suited for this type of product. USDe and Ethena offer a more decentralized and potentially higher-yield stablecoin solution compared to traditional stablecoins like USDC or USDT. Unlike centralized stablecoins, USDe is backed by a synthetic dollar protocol with on-chain collateralization, while Ethena generates yields through its delta-neutral staking strategy.
 
 Additionally, I drew inspiration from the simplistic UX and one-click UI of Fluid. Which motivated me to design a user-friendly and intuitive interface for Delta Vault, specifically targeting DeFi users.
 
@@ -78,22 +78,10 @@ new_cash = current_cash - (buy_sell_quantity * current_price)
 last_price = current_price
 ```
 
-#### Key Features
-
-- **Mean Reversion**: Strategy assumes price movements beyond threshold will revert
-- **Dynamic Position Sizing**: Adjusts position based on available capital and market conditions
-- **Risk Management**: Built-in position limits based on cash constraints
-- **Automated Rebalancing**: Continuously monitors and adjusts positions
-
-### 2. Client ([`frontend`](./delta-vault-frontend))
-
-- This is the front-end interface for Delta Vault, designed to interact with the contract module.
-
-
 ### 3. Contracts Module ([`contracts`](./delta-vault-contracts))
 
 - Contains the core contracts of Delta Vault.
-- The contracts are deployedd on Ethena testenet.
+- The contracts are deployedd on **Ethena Testnet**.
   - USDe OFT [`0x426E7d03f9803Dd11cb8616C65b99a3c0AfeA6dE`](https://explorer-ethena-testnet-0.t.conduit.xyz/token/0x426E7d03f9803Dd11cb8616C65b99a3c0AfeA6dE)
   - Delta Vault Factory [`0xA45BaFe594b05Cd51d1B95175e88F6e22C6E2c74`](https://explorer-ethena-testnet-0.t.conduit.xyz/address/0xA45BaFe594b05Cd51d1B95175e88F6e22C6E2c74)
   - Delta Vault Product [`0xE56Cbd1ad4979bc51344aBAaD2eBd3eEda02e084`](https://explorer-ethena-testnet-0.t.conduit.xyz/address/0xE56Cbd1ad4979bc51344aBAaD2eBd3eEda02e084)
@@ -217,7 +205,7 @@ The keeper service monitors snowball products and applies the delta-neutral stra
 Ensure these configurations are correctly set in your `.env` file to enable seamless operation.
 
 
-## Future Work 
+## Future Work
 
 ### Future Work for Delta Vault
 
