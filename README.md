@@ -5,6 +5,7 @@
   <img src="./resources/icon.png" height="70" width="80" style="">
   <h2 align="center">Delta Vault</h2>
 </p align = "center">
+<p align="center">Unlocking High-Yield Opportunities, One Snowball at a Time!</p>
   <p align="center">
     <a href="">Video Demo</a>
   </p>

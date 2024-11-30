@@ -25,7 +25,7 @@ function App() {
                 <Flex flexDirection={"column"} w="97%">
                     <Flex p={4} color="white" justifyContent={"center"} alignItems={"center"} position={"relative"}>
                         <Heading color={"white"} fontSize={"4xl"}>Bullish Snowball</Heading>
-                        <Image src={"/images/ethena_logo.png"} alt="Polygon Logo" boxSize="22px" position={"absolute"} bottom={3} right={"38.5%"} />
+                        <Image src={"/images/ethena_logo.png"} alt="Ethena Logo" boxSize="22px" position={"absolute"} bottom={3} right={"38.5%"} />
                     </Flex>
 
                     {/* Bottom 1/3 with Stat */}
@@ -143,7 +143,7 @@ function App() {
                                             "right": "-5px"
                                         }}
                                     >
-                                        <Image src={"/images/bitcoin_logo.png"} alt="Polygon Logo" boxSize="22px" />
+                                        <Image src={"/images/bitcoin_logo.png"} alt="Ethena Logo" boxSize="22px" />
                                     </div>
                                 </div>
                                 <Heading>
@@ -155,7 +155,7 @@ function App() {
                                     Profit price
                                 </Heading>
                                 <Text>
-                                    The Profit price is observed every Friday only. If the average price of the underlying crypto from 07:00 - 08:00 UTC is equal to or above the Profit price on a Friday, your product expires on the same day and you receive earnings early.
+                                    If the average price of the underlying crypto is equal to or above the Profit price, your product expires and you receive earnings early.
                                 </Text>
                             </Box>
                             <Box>
@@ -163,7 +163,7 @@ function App() {
                                     Caution price
                                 </Heading>
                                 <Text>
-                                    The Caution price is observed daily. If the average price of the underlying crypto from 07:00 - 08:00 UTC is equal to or below the Caution price on any day, you risk a conversion scenario when the product expires.
+                                    If the average price of the underlying crypto is equal to or below the Caution price, you risk a conversion scenario when the product expires.
                                 </Text>
                             </Box>
                             <Box>
@@ -171,7 +171,7 @@ function App() {
                                     Target price
                                 </Heading>
                                 <Text>
-                                    The Target price is determined at the start of your term. In case of a conversion scenario, you’ll buy the underlying crypto at this price, which will be higher than the prevailing market price.
+                                    In case of a conversion scenario, you’ll buy the underlying crypto at this price, which will be higher than the prevailing market price.
                                 </Text>
                             </Box>
                         </Flex>

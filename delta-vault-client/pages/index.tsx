@@ -17,17 +17,21 @@ const Home: NextPage = () => {
                     </div>
                     <Flex width={"65%"} direction={"column"} alignItems={"flex-end"} justifyContent={"center"} gap={"6"}>
                         <Heading fontSize={"5xl"}>
-                            Secured <span style={{ "color": "#aea3ff" }}>
-                                Transactions
-                            </span> from Delta Vault
+                            Unlocking High-Yield Opportunities, One <br />
+                            <span style={{ "color": "#aea3ff" }}>
+                                Snowball
+                            </span> at a Time!
                         </Heading>
                         <Text fontSize={"xl"} align={"right"} color={"lightgrey"}>
-                            Get the most secured and seamless transactions for Bitcoin with Delta Vault. With advanced encryption and transparent processes, your assets are always protected. Manage your crypto with confidence and ease and secure the future with Delta Vault.
+                            Delta Vault brings the innovative &quot;Snowball&quot; financial product to DeFi, offering high-yield opportunities in the derivatives market with strategies inspired by traditional finance.
+                        </Text>
+                        <Text fontSize={"xl"} align={"right"} color={"lightgrey"}>
+                            As part of the Ethena ecosystem, Delta Vault is set to redefine DeFi by integrating with upcoming decentralized exchange.
                         </Text>
                         <Flex gap={"18"}>
                             <Flex bg={"#160738"} padding={"10px 40px"} borderRadius={"10px"} direction="column" gap={2} justifyContent={"center"} alignItems={"center"} height={"100%"} rowGap={"1"}>
                                 <Heading fontSize="md" >TOTAL VALUE LOCKED</Heading>
-                                <Text fontSize="lg" color={"#4287f5"} fontWeight="bold" >$ 9,018,623.78</Text>
+                                <Text fontSize="lg" color={"#4287f5"} fontWeight="bold" >$186,964,44</Text>
                             </Flex>
                             <Button as={NextLink}
                                 href='/products'
@@ -67,7 +71,7 @@ const Home: NextPage = () => {
                         }}
                     >
                         <Text fontSize={"2xl"} align={"left"}>
-                            Get the most secured transactions and navigate market fluctuations with confidence using Delta Vault. Our secure transactions and advanced strategies ensure you achieve higher yields while safeguarding your assets. Whether the market rises or falls, we help you stay ahead, grow consistently, and achieve financial goals with ease.
+                            Delta Vault brings the innovative &quot;Snowball&quot; financial product to DeFi, offering high-yield opportunities in the derivatives market with strategies inspired by traditional finance.
                         </Text>
                     </div>
                 </Flex>

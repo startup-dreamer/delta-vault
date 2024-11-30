@@ -10,7 +10,7 @@ export default function Scene1() {
                     Receive earnings early in USDe
                 </Heading>
                 <Text color={"lightgrey"}>
-                    {"If the price is equal to or above the Profit price on a Friday, you'll receive your earnings on the same day:"}
+                    {"If the price is equal to or above the Profit price, you'll receive your earnings immediately:"}
                 </Text>
                 <div
                     style={{

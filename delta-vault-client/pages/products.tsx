@@ -14,7 +14,8 @@ const ProductsPage = () => {
             duration: '28 Days',
             imageUrl: '/images/bullishSnowball.png', // Replace with the path to your image
             pageUrl: '/bullish-snowball', // Replace with the path to your product page
-            backImage: "linear-gradient(135deg, rgba(38,79,68,1) 50%, #24273d)"
+            backImage: "linear-gradient(135deg, rgba(38,79,68,1) 50%, #24273d)",
+            icon: "/images/USDe_icon.png"
         },
         {
             id: 2, // Corrected ID for the second product
@@ -25,7 +26,8 @@ const ProductsPage = () => {
             duration: '28 Days',
             imageUrl: '/images/bearishSnowball.png', // Replace with the path to your image
             pageUrl: '/bearish-snowball', // Replace with the path to your product page
-            backImage: "linear-gradient(135deg, rgba(255, 120, 120,0.7) 50%, #24273d)"
+            backImage: "linear-gradient(135deg, rgba(255, 120, 120,0.7) 50%, #24273d)",
+            icon: "/images/Bitcoin_logo.png"
         },
         // ... add more products as needed
     ];
@@ -64,7 +66,7 @@ const ProductsPage = () => {
                                                     top: "35px",
                                                 }}
                                             >
-                                                <Image src={"/images/USDe_icon.png"} alt="Ethena Logo" width={"35px"} borderRadius={"50%"}/>
+                                                <Image src={product.icon} alt="Ethena Logo" width={"35px"} borderRadius={"50%"}/>
                                                 <div
                                                     style={{
                                                         "position": "absolute",
@@ -72,7 +74,7 @@ const ProductsPage = () => {
                                                         "right": "-8px"
                                                     }}
                                                 >
-                                                    <Image src={"/images/Ethena_logo.png"} alt="Polygon Logo" boxSize="22px" />
+                                                    <Image src={"/images/Ethena_logo.png"} alt="Ethena Logo" boxSize="22px" />
                                                 </div>
                                             </div>
                                         </div>
