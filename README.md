@@ -210,20 +210,17 @@ Ensure these configurations are correctly set in your `.env` file to enable seam
 ### Future Work for Delta Vault
 
 1. **Multi-Cryptocurrency Support**  
-   Extend the vault to support a wide range of cryptocurrencies beyond BTC, such as ETH and other major tokens, enhancing its usability and market appeal.
+   Extend the vault to support a wide range of cryptocurrencies beyond BTC.
 
 2. **Enhanced Hedging Strategies**  
-   Develop and implement advanced hedging strategies to optimize risk management and returns for users and investors.
-
-3. **On-Chain Liquidity Integration**  
-   Seamlessly integrate with on-chain liquidity protocols to improve efficiency in managing vault assets and executing trades.
+   Develop and implement advanced hedging strategies.
 
 4. **DEX Integration**  
    - Once the new Ethereal spot and perpetual futures DEX is live, integrate it into Delta Vault for automated token swaps.  
-   - Reduce dependency on manual keepers by leveraging the DEX’s functionalities.
+   - Reduce dependency on manual keepers.
 
 5. **Automation Service Migration**  
-   Transition from reliance on keepers to modern automation services to streamline operations and reduce overhead.
+   Transition from reliance on keepers to modern automation services to streamline operations.
 
 6. **Community and Investor Engagement**  
    Focus on building a robust community-driven governance model and actively involve investors to align the platform’s growth with the ecosystem's goals.
