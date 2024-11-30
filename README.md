@@ -127,7 +127,12 @@ last_price = current_price
 
 </center>
 
+<details>
+<summary>
+
 ## Run Locally
+
+</summary>
 
 ### Prerequisites
 
@@ -204,6 +209,7 @@ The keeper service monitors snowball products and applies the delta-neutral stra
 
 Ensure these configurations are correctly set in your `.env` file to enable seamless operation.
 
+</details>
 
 ## Future Work
 
