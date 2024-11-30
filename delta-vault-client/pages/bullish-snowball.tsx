@@ -65,7 +65,7 @@ function App() {
                     <Flex justifyContent={"center"} flexDirection={"column"} textAlign={"left"} gap={2}>
                         <Heading>What is Snowball?</Heading>
                         <Text fontSize={"xl"} color={"lightgrey"}>
-                            Snowball is a unique product that allows you to earn lucrative rewards when future crypto prices fall within a certain range.
+                            Snowball is a unique product that allows you to earn lucrative rewards when future crypto prices rise/fall within a certain range.
                         </Text>
                     </Flex>
                 </Box>
