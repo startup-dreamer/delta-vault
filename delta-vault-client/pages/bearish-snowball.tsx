@@ -24,7 +24,7 @@ function App() {
                 <Flex flexDirection={"column"} w="97%">
                     <Flex p={4} color="white" justifyContent={"center"} alignItems={"center"} position={"relative"}>
                         <Heading color={"white"} fontSize={"4xl"}>Bearish Snowball</Heading>
-                        <Image src={"/images/ethena_logo.png"} alt="Ethena Logo" boxSize="22px" position={"absolute"} bottom={3} right={"38.5%"} />
+                        <Image src={"/images/ethena_logo.png"} alt="Ethena Logo" boxSize="35px" position={"absolute"} bottom={4} right={"38.5%"} />
                     </Flex>
 
                     {/* Bottom 1/3 with Stat */}

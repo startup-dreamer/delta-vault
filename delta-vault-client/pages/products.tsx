@@ -7,27 +7,31 @@ const ProductsPage = () => {
     const products = [
         {
             id: 1,
-            name: 'Bullish Snowball',
+            name: 'Bullish Snowball (BTC)',
             apy: '18%',
             description: 'UP TO 18% Fixed APY', // Adjust the XX% to match the actual APY you've provided
-            underlyingAsset: 'USDe',
+            underlyingAsset: 'BTC',
+            stakingAsset: 'USDe',
             duration: '28 Days',
             imageUrl: '/images/bullishSnowball.png', // Replace with the path to your image
             pageUrl: '/bullish-snowball', // Replace with the path to your product page
             backImage: "linear-gradient(135deg, rgba(38,79,68,1) 50%, #24273d)",
-            icon: "/images/USDe_icon.png"
+            icon: "/images/USDe_icon.png",
+            icon1: "/images/Bitcoin_logo.png"
         },
         {
             id: 2, // Corrected ID for the second product
-            name: 'Bearish Snowball',
+            name: 'Bearish Snowball (BTC)',
             apy: '19%',
             description: 'UP TO 19% Fixed APY', // Adjust the XX% to match the actual APY you've provided
             underlyingAsset: 'BTC',
+            stakingAsset: 'wBTC',
             duration: '28 Days',
             imageUrl: '/images/bearishSnowball.png', // Replace with the path to your image
             pageUrl: '/bearish-snowball', // Replace with the path to your product page
             backImage: "linear-gradient(135deg, rgba(255, 120, 120,0.7) 50%, #24273d)",
-            icon: "/images/Bitcoin_logo.png"
+            icon: "/images/Bitcoin_logo.png",
+            icon1: "/images/USDe_icon.png"
         },
         // ... add more products as needed
     ];
@@ -74,7 +78,7 @@ const ProductsPage = () => {
                                                         "right": "-8px"
                                                     }}
                                                 >
-                                                    <Image src={"/images/Ethena_logo.png"} alt="Ethena Logo" boxSize="22px" />
+                                                    <Image src={product.icon1} alt="Ethena Logo" boxSize="22px" borderRadius={"50%"} />
                                                 </div>
                                             </div>
                                         </div>
@@ -82,6 +86,7 @@ const ProductsPage = () => {
                                             <Text fontSize="22px" fontWeight="bold">{product.name}</Text>
                                             <Flex direction={"column"} background={"rgba(133, 153, 201, 0.3)"} borderRadius={6} p={3}>
                                                 <Text fontSize="sm" fontWeight={"bold"}>{`Duration: ${product.duration}`}</Text>
+                                                <Text fontSize="sm" fontWeight={"bold"}>{`Staking Asset: ${product.stakingAsset}`}</Text>
                                                 <Text fontSize="sm" fontWeight={"bold"}>{`Underlying Asset: ${product.underlyingAsset}`}</Text>
                                             </Flex>
                                             <Link as={NextLink} href={product.pageUrl}>

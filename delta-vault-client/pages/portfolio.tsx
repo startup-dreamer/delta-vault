@@ -174,7 +174,7 @@ const PortfolioPage = () => {
                                         <StatLabel fontWeight="bold" fontSize={'medium'}>BTC Price Status</StatLabel>
                                         <StatNumber>{btcPrice ? `${btcPrice.toFixed(2)} USDe` : 'Fetching...'}</StatNumber>
                                         <StatHelpText fontSize={'medium'}>
-                                            {priceIndicator}
+                                            {priceIndicator}{' '}
                                             {priceStatus}
                                         </StatHelpText>
                                     </Stat>

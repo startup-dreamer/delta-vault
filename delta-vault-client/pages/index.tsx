@@ -23,10 +23,10 @@ const Home: NextPage = () => {
                             </span> at a Time!
                         </Heading>
                         <Text fontSize={"xl"} align={"right"} color={"lightgrey"}>
-                            Delta Vault brings the innovative &quot;Snowball&quot; financial product to DeFi, offering high-yield opportunities in the derivatives market with strategies inspired by traditional finance.
+                            Delta Vault brings the traditional financial product &quot;Snowball&quot; to DeFi, offering high-yield opportunities in the derivatives market.
                         </Text>
                         <Text fontSize={"xl"} align={"right"} color={"lightgrey"}>
-                            As part of the Ethena ecosystem, Delta Vault is set to redefine DeFi by integrating with upcoming decentralized exchange.
+                            As part of the Ethena ecosystem, Delta Vault is set to redefine DeFi.
                         </Text>
                         <Flex gap={"18"}>
                             <Flex bg={"#160738"} padding={"10px 40px"} borderRadius={"10px"} direction="column" gap={2} justifyContent={"center"} alignItems={"center"} height={"100%"} rowGap={"1"}>
